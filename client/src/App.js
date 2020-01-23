@@ -1,16 +1,19 @@
-import React from 'react';
-import Fileupload from './components/fileupload';
-import Navbar from './components/navbar';
+import React, { Component } from 'react';
 import './App.css';
+import Upload from './components/Upload/Upload';
+import Navbar from './components/navbar';
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar />
-
-      <Fileupload />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Navbar />
+        <div className="Card">
+          <Upload />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
