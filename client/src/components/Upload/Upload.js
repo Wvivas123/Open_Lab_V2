@@ -2,46 +2,47 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Upload extends Component {
-  state = {
-    file: null
-  };
-
-  handleFile(e) {
-    let file = e.target.files[0];
-    this.setState({ file: file });
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedFile: null
+    };
   }
-
-  handleUpload(e) {
-    console.log(this.state, 'This is the state');
-    let file = e.target.file;
-    let formdata = new FormData();
-    formdata.append('image', file);
-    formdata.append('name', 'william vivas');
-
-    axios({
-      url: '/some/api',
-      method: 'POST',
-      headers: {
-        authorization: 'your token'
-      },
-      data: formdata
-    }).then(res => {
-      console.log('sent');
+  onChangeHandler = event => {
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0
     });
-  }
+  };
+  onClickHandler = () => {
+    const data = new FormData();
+    data.append('file', this.state.selectedFile);
+    axios
+      .post('http://localhost:5000/upload', data, {
+        // receive two    parameter endpoint url ,form data
+      })
+      .then(res => {
+        // then print response status
+        console.log(res.statusText);
+      });
+  };
 
   render() {
     return (
       <div className="Upload">
         <h1>My form</h1>
-        <form>
+        <form action="/upload" encType="multipart/form-data" method="POST">
           <div className="">
             <label>Select a File </label>
-            <input type="file" name="file" onChange={e => this.handleFile(e)} />
+            <input type="file" name="file" onChange={this.onChangeHandler} />
           </div>
           <br></br>
-          <button type="button" onClick={e => this.handleUpload(e)}>
-            Click Upload
+          <button
+            type="button"
+            class="btn btn-success btn-block"
+            onClick={this.onClickHandler}
+          >
+            Upload
           </button>
         </form>
       </div>
