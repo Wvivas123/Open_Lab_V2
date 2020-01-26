@@ -1,18 +1,20 @@
 const express = require('express');
 const app = express();
-var multer = require('multer');
-var cors = require('cors');
+const multer = require('multer');
+const cors = require('cors');
+const PORT = process.env.PORT || 8000;
 app.use(cors());
-var storage = multer.diskStorage({
+
+let storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, 'public');
+    cb(null, 'public_uploads');
   },
   filename: function(req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
   }
 });
 
-var upload = multer({ storage: storage }).array('file');
+const upload = multer({ storage: storage }).array('file');
 
 app.get('/', function(req, res) {
   return res.send('Hello Server');
@@ -33,6 +35,6 @@ app.post('/upload', function(req, res) {
   });
 });
 
-app.listen(8000, function() {
-  console.log('App running on port 8000');
+app.listen(PORT, function() {
+  console.log('Server running on port 8000');
 });
