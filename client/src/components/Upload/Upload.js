@@ -18,7 +18,7 @@ class Upload extends Component {
     const data = new FormData();
     data.append('file', this.state.selectedFile);
     axios
-      .post('http://localhost:5000/upload', data, {
+      .post('http://localhost:8000/upload', data, {
         // receive two    parameter endpoint url ,form data
       })
       .then(res => {

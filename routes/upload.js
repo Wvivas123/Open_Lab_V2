@@ -1,23 +1,19 @@
 const express = require('express');
-const IncomingForm = require('formidable').IncomingForm;
-var fs = require('fs');
-var router = express.Router();
-
+const router = express.Router();
+const multer = require('multer');
+const upload = multer({ dest: './Uploads/' });
 const app = express();
 
-app.get('/upload', function(req, res) {
-  if (req.url == '/upload' && req.method.toLowerCase() == 'post') {
-    // parse a file upload
-    var form = new formidable.IncomingForm();
-
-    form.parse(req, function(err, fields, files) {
-      res.writeHead(200, { 'content-type': 'text/plain' });
-      res.write('received upload:\n\n');
-      res.end(util.inspect({ fields: fields, files: files }));
-    });
-
-    return;
+app.post('/upload', upload.single('file'), function(req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  const file = req.file;
+  if (!file) {
+    const error = new Error('Please upload a file');
+    error.httpStatusCode = 400;
+    return next(error);
   }
+  res.send(file);
 });
 
 module.exports = router;
