@@ -1,6 +1,8 @@
+/* React Packages in Use */
 import React, { Component } from 'react';
 import axios from 'axios';
 
+/* sets state to null on load */
 class Upload extends Component {
   constructor(props) {
     super(props);
@@ -8,12 +10,16 @@ class Upload extends Component {
       selectedFile: null
     };
   }
+
+  /*Fires when the user loads a file into form */
   onChangeHandler = event => {
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0
     });
   };
+
+  /*On Click function that sends file to backend Via Axios */
   onClickHandler = () => {
     const data = new FormData();
     data.append('file', this.state.selectedFile);
@@ -26,6 +32,8 @@ class Upload extends Component {
         console.log(res.statusText);
       });
   };
+
+  /*HTML to be rendered*/
 
   render() {
     return (
@@ -50,4 +58,5 @@ class Upload extends Component {
   }
 }
 
+/*Exports to App.js*/
 export default Upload;
