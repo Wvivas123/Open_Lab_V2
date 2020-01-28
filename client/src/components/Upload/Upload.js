@@ -37,22 +37,24 @@ class Upload extends Component {
 
   render() {
     return (
-      <div className="Upload">
-        <h1>My form</h1>
-        <form action="/upload" encType="multipart/form-data" method="POST">
-          <div className="">
-            <label>Select a File </label>
-            <input type="file" name="file" onChange={this.onChangeHandler} />
-          </div>
-          <br></br>
-          <button
-            type="button"
-            class="btn btn-success btn-block"
-            onClick={this.onClickHandler}
-          >
-            Upload
-          </button>
-        </form>
+      <div className="Card">
+        <div className="Upload">
+          <h1>My form</h1>
+          <form action="/upload" encType="multipart/form-data" method="POST">
+            <div className="">
+              <label>Select a File </label>
+              <input type="file" name="file" onChange={this.onChangeHandler} />
+            </div>
+            <br></br>
+            <button
+              type="button"
+              class="btn btn-success btn-block"
+              onClick={this.onClickHandler}
+            >
+              Upload
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
