@@ -5,6 +5,7 @@ const app = express();
 const multer = require('multer');
 const cors = require('cors');
 const PORT = process.env.PORT || 8000;
+const fs = require('fs');
 
 //______________________________________//
 
@@ -48,6 +49,46 @@ app.post('/upload', function(req, res) {
   });
 });
 //_________________________________________________//
+
+app.get('/music', function(req, res) {
+  const folder = './public_uploads/';
+  const currentDir = [];
+  fs.readdir(folder, (err, files) => {
+    for (let i = 0; i < files.length; i++) {
+      currentDir.push(files[i]);
+    }
+    res.send('we getting there');
+  });
+  console.log(currentDir);
+
+  //var file = __dirname + '/public_uploads/' + file;
+  //console.log(file);
+  //fs.exists(file, function(exists) {
+  //if (exists) {
+  //var rstream = fs.createReadStream(file);
+  //rstream.pipe(res);
+  //} else {
+  //res.send('Its a 404');
+
+  //}
+  // });
+});
+
+app.get('/download', function(req, res) {
+  var fileId = 'song.mp4';
+  var file = __dirname + '/public_uploads/' + fileId;
+  fs.exists(file, function(exists) {
+    if (exists) {
+      res.setHeader('Content-disposition', 'attachment; filename=' + fileId);
+      res.setHeader('Content-Type', 'application/audio/mp4');
+      var rstream = fs.createReadStream(file);
+      rstream.pipe(res);
+    } else {
+      res.send('Its a 404');
+      res.end();
+    }
+  });
+});
 
 //initilizes server and responds telling server is running
 //_________________________________________________________//
