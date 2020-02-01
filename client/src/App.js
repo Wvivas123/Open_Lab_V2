@@ -5,6 +5,7 @@ import Upload from './components/Upload/Upload';
 import Navbar from './components/navbar';
 import Landing from './components/Landing/Landing';
 import List from './components/List /List';
+import Footer from './components/footer';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/list" component={List} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     );

@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 class Landing extends Component {
   render() {
     return (
-      <section className="Landing">
-        <div>
-          <h1>Hello world</h1>
-          <h1>This is Open Lab a place to find collaborators</h1>
-          <button type="button" class="btn btn-success btn-block">
-            Click to upload file
-          </button>
+      <section className="landingBackground">
+        <div className="landingBackground"></div>
+        <div className="landingCard">
+          <h1>Welcome to Open Lab</h1>
+          <hr />
+          <h3>A place for Collaborators</h3>
         </div>
       </section>
     );
