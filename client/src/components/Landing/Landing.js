@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class Landing extends Component {
+  componentDidMount() {
+    console.log('GrandChild did mount.');
+  }
   render() {
     return (
       <section className="landingBackground">

@@ -52,26 +52,16 @@ app.post('/upload', function(req, res) {
 
 app.get('/music', function(req, res) {
   const folder = './public_uploads/';
-  const currentDir = [];
-  fs.readdir(folder, (err, files) => {
-    for (let i = 0; i < files.length; i++) {
-      currentDir.push(files[i]);
+  var file = __dirname + '/public_uploads/' + 'song.mp4';
+  console.log(file);
+  fs.exists(file, function(exists) {
+    if (exists) {
+      var rstream = fs.createReadStream(file);
+      rstream.pipe(res);
+    } else {
+      res.send('Its a 404');
     }
-    res.send('we getting there');
   });
-  console.log(currentDir);
-
-  //var file = __dirname + '/public_uploads/' + file;
-  //console.log(file);
-  //fs.exists(file, function(exists) {
-  //if (exists) {
-  //var rstream = fs.createReadStream(file);
-  //rstream.pipe(res);
-  //} else {
-  //res.send('Its a 404');
-
-  //}
-  // });
 });
 
 app.get('/download', function(req, res) {

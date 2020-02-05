@@ -39,7 +39,7 @@ class Upload extends Component {
     return (
       <div className="Card">
         <div className="Upload">
-          <h1>My form</h1>
+          <h1>Upload a File to Find Collaborators</h1>
           <form action="/upload" encType="multipart/form-data" method="POST">
             <div className="">
               <label>Select a File </label>
